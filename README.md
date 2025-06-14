@@ -42,12 +42,6 @@ ChickMate solves this problem by:
 
 ---
 
-## 📸 Screenshot Preview
-
-![ChickMate Interface](https://via.placeholder.com/800x400.png?text=Add+Screenshot+Here)
-
----
-
 ## 🛠️ Tech Stack
 
 | Component       | Tech Used                 |
@@ -66,7 +60,7 @@ ChickMate solves this problem by:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/ChickMate.git
+git clone https://github.com/Yashvin186/ChickMate.git
 cd ChickMate
 
 2. Create Virtual Environment (optional)
