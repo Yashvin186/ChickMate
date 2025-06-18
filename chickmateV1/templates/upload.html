@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Image</title>
+  <style>
+    body {
+      background-color: #fafafa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .upload-box {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="file"] {
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #b52a36;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a0232f;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="/dashboard" method="post" enctype="multipart/form-data">
+    <div class="upload-box">
+      <h2>Upload the Image</h2>
+      <input type="file" name="profile_image" required>
+  
+      <a  href="/building">Submit</a>
+      <a href="/cancel">Cancel</a>
+      
+    </div>
+  </form>
+
+</body>
+</html>

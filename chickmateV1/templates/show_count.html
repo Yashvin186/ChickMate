@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Final Count</title>
+    <style>
+        body {
+            background-color: #fffbe6;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #444;
+        }
+
+        .count-box {
+            font-size: 28px;
+            margin-top: 20px;
+            color: #222;
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Detection Stopped</h1>
+    <div class="count-box">
+        Final Ball Count: {{ count }}
+    </div>
+
+    <br><br>
+    <a href="/dashboard" class="back-btn">Go Back</a>
+    <a href="/video_page" class="back-btn">Recount</a>
+    <a href="/batch_entry" class="back-btn">Continue</a>
+
+</body>
+</html>

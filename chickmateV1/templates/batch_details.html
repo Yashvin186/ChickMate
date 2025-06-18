@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Batch Details | ChickMate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar a {
+      text-decoration: none;
+      margin-left: 15px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .logout {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div><strong>🐥 ChickMate <sub style="color:red;">by Skillovate</sub></strong></div>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/upload">Upload</a>
+      <a href="/video_page">Live</a>
+      <a href="/batch_details">Batch Details</a>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Batch History </h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Batch ID</th>
+          <th>Chick Count</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for batch_id, chick_count, timestamp in batches %}
+          <tr>
+            <td>{{ batch_id }}</td>
+            <td>{{ chick_count }}</td>
+            <td>{{ timestamp }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="3">No batch data found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

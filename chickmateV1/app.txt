@@ -1,0 +1,205 @@
+from flask import Flask, redirect, render_template, url_for, request, flash, session, Response, jsonify
+import sqlite3
+import hashlib
+import os
+import cv2
+from ultralytics import YOLO
+import datetime
+import time
+global current_time
+t = time.localtime()
+current_time = time.strftime("%H:%M:%S", t)
+
+app = Flask(_name_)
+app.secret_key = 'your_secret_key'
+
+
+model = YOLO(r"C:\Users\vaish\Documents\New Project\chick\chic\best.pt")
+cap = cv2.VideoCapture(0)
+
+
+DATABASE = os.path.join(app.root_path, 'users.db')
+
+
+
+def init_db():
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        email TEXT,
+        phone TEXT,
+        role TEXT NOT NULL
+          )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS counts (
+            count INTEGER,
+            username TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+    print(f"Database initialized at: {DATABASE}")
+
+
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+
+def check_credentials(username, password):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    #hashed_password = hash_password(password)  # Hash input for comparison
+    cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+    result = cursor.fetchone()
+    conn.close()
+    return result
+
+current_ball_count = 0
+
+def generate_frames():
+    global current_ball_count
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        results = model.track(source=frame, persist=True, tracker="bytetrack.yaml", conf=0.5, verbose=False)
+        current_ball_count = 0
+
+        if results and len(results) > 0:
+            boxes = results[0].boxes
+            if boxes is not None:
+                for box in boxes:
+                    cls = int(box.cls[0])
+                    conf = float(box.conf[0])
+                    if cls == 0 and conf > 0.6:
+                        current_ball_count += 1
+                        x1, y1, x2, y2 = map(int, box.xyxy[0])
+                        label = f"Ball ({conf:.2f})"
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                        cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+
+        cv2.putText(frame, f"Balls in Frame: {current_ball_count}", (20, 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
+
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username'].strip()
+        password = request.form['password'].strip()
+
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            session['username'] = user[1]  # store username in session
+            return redirect('/dashboard')  # redirect if correct
+        else:
+            flash("Incorrect username or password.", "danger")
+            return redirect('/')
+
+    return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    if 'username' in session:
+        return render_template('dashboard.html', username=session['username'])
+    else:
+        return redirect('/')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']  # 🔐 HASH HERE
+        role = request.form['role']
+
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        if cursor.fetchone():
+            flash('Username already exists. Choose a different one.', 'danger')
+            return redirect(url_for('register'))
+
+        cursor.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+                       (username, password, role))
+        conn.commit()
+        conn.close()
+        flash('Registration successful! You can now log in.', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
+
+@app.route('/video_page')
+def video_page():
+    return render_template('video_feed.html', count=current_ball_count)
+
+
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash("You have been logged out.", "info")
+    return redirect(url_for('login'))
+
+
+
+@app.route('/cancel')
+def cancel():
+    return render_template('cancel.html')
+
+
+
+@app.route('/get_count')
+def get_count():
+    return jsonify({'count': current_ball_count})
+
+
+
+@app.route('/show_count')
+def show_count():
+    return render_template('show_count.html', count=current_ball_count)
+@app.route('/upload')
+def upload():
+    return render_template('upload.html')
+
+@app.route('/building')
+def build():
+    return render_template('building.html')
+    
+@app.route('/batch_entry',methods=['POST','GET'])
+def entry():
+    global current_ball_count,batch_id
+    if request.method== "POST" :
+     batch_id=request.form['batch_id']
+    return render_template('batch_entry.html',count=current_ball_count,time=current_time)
+
+
+if _name_ == '_main_':
+    init_db()
+    app.run(debug=True)

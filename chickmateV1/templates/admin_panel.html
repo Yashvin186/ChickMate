@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Chick Count</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .navbar-nav {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: normal;
+    }
+
+    .nav-link.active {
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    .theme-switch button {
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 4px 10px;
+      cursor: not-allowed;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .panel-title {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .col-md-4, .col-md-6 {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="date"],
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .chart-placeholder {
+      height: 200px;
+      background: repeating-linear-gradient(
+        45deg,
+        #e0e0e0,
+        #e0e0e0 10px,
+        #f9f9f9 10px,
+        #f9f9f9 20px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: italic;
+      color: #777;
+      border-radius: 8px;
+    }
+
+    .btn-outline-primary {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      border: 1px solid #0d6efd;
+      background: #fff;
+      color: #0d6efd;
+      border-radius: 5px;
+      cursor: not-allowed;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .navbar-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="navbar-brand">🐥 Chick Count Admin</a>
+    <ul class="navbar-nav">
+      <li><a class="nav-link" href="#">Dashboard</a></li>
+      <li><a class="nav-link" href="#">Users</a></li>
+      <li><a class="nav-link" href="#">Batches</a></li>
+      <li><a class="nav-link" href="#">Profile</a></li>
+      <li><a class="nav-link active" href="#">Analytics</a></li>
+      <li><a class="nav-link" href="#">Logout</a></li>
+      <li class="theme-switch"><button title="Disabled"

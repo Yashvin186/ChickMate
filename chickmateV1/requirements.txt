@@ -1,0 +1,38 @@
+# requirements.txt
+
+# Web framework
+Flask==2.3.3
+
+# Computer vision
+opencv-python==4.9.0.80
+Pillow==10.3.0
+numpy==1.24.4
+
+# YOLOv8 and related dependencies
+ultralytics==8.1.39
+torch>=1.12.0
+torchvision>=0.13.0
+
+# SQLite integration (comes with Python but added for clarity)
+sqlite3-binary==3.39.3
+
+# Utility packages
+Werkzeug==2.3.7
+setuptools==67.7.2
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.3
+
+# For API and JSON handling
+requests==2.31.0
+
+# Optional (used internally by YOLOv8)
+tqdm==4.66.1
+matplotlib==3.7.1
+
+
+#✅ Instructions to use:
+#Save the above content as a file named requirements.txt in your project root.
+
+#Install all dependencies at once using:
+#pip install -r requirements.txt

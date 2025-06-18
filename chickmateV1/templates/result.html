@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detection Result</title>
+</head>
+<body>
+    <h2>Detection Result</h2>
+    <p>Number of balls detected: {{ count }}</p>
+    <img src="{{ url_for('static', filename=image_path.split('static/')[1]) }}" style="max-width: 100%; height: auto;" alt="Detected Image">
+    <br><br>
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>

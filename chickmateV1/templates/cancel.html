@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cancel Button</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .warning-box {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .warning-box h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .warning-box p {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .button-group a {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      flex: 1;
+      text-align: center;
+    }
+
+    .warning-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+
+    .warning-btn:hover {
+      background-color: #b52a36;
+    }
+  </style>
+</head>
+<body>
+<form action="/video_page">
+
+  <div class="warning-box">
+    <h2>Are you Sure?</h2>
+    <p></p>
+    <div class="button-group">
+      <a href= "/dashboard" class="warning-box">Yes</a>
+      <a href= "/video_page" class="warning-box">Cancel</a>
+    </div>
+  </div>
+</form>
+</body>
+</html>

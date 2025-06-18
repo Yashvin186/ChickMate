@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <meta charset="UTF-8">
+  <title>Worker Dashboard | Chick Count</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #fff;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #333;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .navbar a.logout {
+      color: red;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .stat-box {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      flex: 1;
+    }
+
+    .stat-box.success {
+      color: green;
+    }
+
+    .stat-box.warning {
+      color: orange;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .bar-container {
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      height: 24px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .bar {
+      background-color: #0d6efd;
+      height: 24px;
+      line-height: 24px;
+      color: white;
+      text-align: center;
+      width: 70%; /* You can dynamically change this */
+    }
+
+    ul.uploads {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.uploads li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .badge {
+      background-color: #0d6efd;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div><strong>🐥ChickMate<sub style="color: red;">by skillovate</sub></strong></div>
+    <div>
+      <a href="#">Dashboard</a>
+      <a href="/upload">Upload Image</a>
+      <a href="/video_page">Live Detection</a>
+      <a href="#">Profile</a>
+      <a href="/logout-confirm">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+    <h2>Welcome, {{username}}</h2>
+
+
+    <div class="stats">
+      <div class="stat-box">
+        Today<br><strong>120</strong>
+      </div>
+      <div class="stat-box success">
+        This Week<br><strong>530</strong>
+      </div>
+      <div class="stat-box warning">
+        This Month<br><strong>2080</strong>
+      </div>
+    </div>
+
+   
+    <div class="card">
+      <h3>📈 Chick Count Trend (Realtime)</h3>
+      <div>Monday</div>
+      <div class="bar-container"><div class="bar" style="width: 50%;">50</div></div>
+      <div>Tuesday</div>
+      <div class="bar-container"><div class="bar" style="width: 70%;">70</div></div>
+      <div>Wednesday</div>
+      <div class="bar-container"><div class="bar" style="width: 90%;">90</div></div>
+    </div>
+
+    <div class="card">
+      <h1 class="logout">Batch History</h1><br>
+      <a href="/batch_details" class="badge"> View</a>
+      <ul class="uploads">
+        <li>
+          2025-06-11 12:00 — <strong>Batch A</strong>
+          <span class="badge">120 Chicks</span>
+        </li>
+        <li>
+          2025-06-10 17:45 — <strong>Batch B</strong>
+          <span class="badge">95 Chicks</span>
+        </li>
+        <li>
+          2025-06-09 09:30 — <strong>Batch C</strong>
+          <span class="badge">88 Chicks</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
