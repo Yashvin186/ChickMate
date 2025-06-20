@@ -1,4 +1,6 @@
 
+![image](https://github.com/user-attachments/assets/cec4a696-e844-4f7c-9c27-a8d9b432cf4f)
+
 # 🐥 ChickMate - AI-Based Chick Counting Software
 
 **ChickMate** is a real-time, AI-powered chick counting software prototype designed for poultry farms. It automates the process of counting chicks in trays using a custom-trained YOLOv8 model with OpenCV and a webcam, significantly reducing manual labor, errors, and time.
