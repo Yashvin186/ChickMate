@@ -1,5 +1,5 @@
 
-![image]([https://github.com/user-attachments/assets/cec4a696-e844-4f7c-9c27-a8d9b432cf4f](https://github.com/Yashvin186/ChickMate/blob/6ad7bbb98988e0bac8611dbb6643a561459eb1c0/images/chickmate%20image/ChickMate%20by%20Skillovate.jpeg))
+![image[https://github.com/Yashvin186/ChickMate/blob/6ad7bbb98988e0bac8611dbb6643a561459eb1c0/images/chickmate%20image/ChickMate%20by%20Skillovate.jpeg]
 
 # 🐥 ChickMate - AI-Based Chick Counting Software
 
